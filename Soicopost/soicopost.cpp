@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <list>
 #include <string>
 #include <fstream>
 #include <limits>
@@ -18,19 +16,19 @@ public:
     string getUser() const { return user; }
     string getText() const {return text; }
     int getLikes() const { return like; }
-    void setLikes(int inputLikes);
+    void setLikes();
     string getTitle() const { return title; }
 
     friend ostream &operator<<(ostream &os, const Post &post);
     friend istream &operator>>(istream &is, Post &post);
 };
 
-void Post::setLikes(int inputLikes)
+void Post::setLikes()
 {
-    like = inputLikes;
+    ++like;
 }
 
-Post::Post(string inputTitle, string inputText, string inputUser) : title(move(inputTitle)), text(move(inputText)), user(move(inputUser)) {}
+Post::Post(string inputTitle, string inputText, string inputUser) : title(move(inputTitle)), text(move(inputText)), user(move(inputUser)), like(0) {}
 
 ostream &operator<<(ostream &os, const Post &post)
 {
@@ -41,8 +39,7 @@ ostream &operator<<(ostream &os, const Post &post)
     return os;
 }
 
-istream &operator>>(istream &is, Post &post)
-{
+istream &operator>>(istream &is, Post &post) {
     getline(is, post.user);
     getline(is, post.title);
     getline(is, post.text);
@@ -50,6 +47,7 @@ istream &operator>>(istream &is, Post &post)
     is.ignore();
     return is;
 }
+
 
 class User
 {
@@ -93,8 +91,7 @@ istream &operator>>(istream &is, User &user)
     return is;
 }
 
-User::User(string inputUsername, string inputPassword)
-    : username(move(inputUsername)), password((move(inputPassword)))
+User::User(string inputUsername, string inputPassword) : username(move(inputUsername)), password((move(inputPassword)))
 {
     isLoggedin = false;
 }
@@ -105,7 +102,7 @@ void createAccount();
 void createPost(User currentUser);
 void displayUserPostHistory(User currentUser);
 void displayGlobalPostHistory();
-void likePost(string titleOfPost);
+void likePost();
 
 
 int main() {
@@ -149,10 +146,9 @@ int main() {
     bool running = true;
     while (running) {
         int operation;
-        cout << "(1) Create post\n(2) Display personal post history\n(3) Display golbal post history\n(4) Exit\n" << endl;
+        cout << "(1) Create post\n(2) Display personal post history\n(3) Display global post history\n(4) Like post\n(5) Exit\n" << endl;
         cin >> operation;
-        cin.ignore();  // Clear the newline character after reading an integer
-
+        cin.ignore();
         switch (operation) {
         case 1:
             createPost(currentUser);
@@ -160,12 +156,15 @@ int main() {
         case 2: 
             displayUserPostHistory(currentUser);
             break;
-        case 4:
+        case 5:
             cout << "Logged out" << endl;
             goto label;
             break;
         case 3:
             displayGlobalPostHistory();
+            break;
+        case 4:
+            likePost();
             break;
         default:
             cout << "Invalid input" << endl;
@@ -176,8 +175,33 @@ int main() {
     return 0;
 }
 
-void likePost(string titleOfPost){
+void likePost(){
+    string titleOfPost;
+    ifstream rfile("post.bin");
+    Post p("","","");
     
+    if (!rfile.is_open())
+    {
+        cerr << "error when opening file" << endl;
+        exit(1);
+    }
+
+    cout << "enter the title of the post you want to like" << endl;
+    getline(cin, titleOfPost);
+
+    while (rfile >> p)
+    {
+        if (titleOfPost.compare(p.getTitle()) == 0)
+        {
+            p.setLikes();
+            cout << "Successfully liked post" << endl;
+            rfile.close();
+            ofstream wfile("post.bin", )
+            return;
+        }
+    }
+    
+    cout << "You were unsuccessful in liking a post" << endl;
 }
 
 void displayGlobalPostHistory(){
@@ -200,22 +224,20 @@ void displayGlobalPostHistory(){
     rfile.close();
 }
 
-void createPost(User currentUser)
-{
+void createPost(User currentUser) {
     string title, text;
     ifstream rfile("post.bin");
     Post p("", "", "");
 
-    if (!rfile.is_open())
-    {
+    if (!rfile.is_open()) {
         cerr << "error when opening file" << endl;
         exit(1);
     }
 
     cout << "enter the title of your post" << endl;
-    cin >> title;
+    getline(cin, title);
     cout << "enter the text for your post" << endl;
-    cin >> text;
+    getline(cin, text);
 
     while (rfile >> p)
     {
@@ -237,6 +259,7 @@ void createPost(User currentUser)
     wfile << newUser;
     wfile.close();
 }
+
 void displayUserPostHistory(User currentUser){
     ifstream rfile("post.bin");
     Post p("","","");
