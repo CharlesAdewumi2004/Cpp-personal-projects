@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 #include <limits>
 using namespace std;
 
@@ -25,7 +26,7 @@ public:
 
 void Post::setLikes()
 {
-    ++like;
+    like++;
 }
 
 Post::Post(string inputTitle, string inputText, string inputUser) : title(move(inputTitle)), text(move(inputText)), user(move(inputUser)), like(0) {}
@@ -179,6 +180,7 @@ void likePost(){
     string titleOfPost;
     ifstream rfile("post.bin");
     Post p("","","");
+    vector<Post> vectorOfPosts;
     
     if (!rfile.is_open())
     {
@@ -191,17 +193,21 @@ void likePost(){
 
     while (rfile >> p)
     {
-        if (titleOfPost.compare(p.getTitle()) == 0)
+        vectorOfPosts.push_back(p);
+    }
+    rfile.close();
+    ofstream wfile("post.bin");
+    for(auto& ps : vectorOfPosts){
+        if (ps.getTitle().compare(titleOfPost) == 0)
         {
-            p.setLikes();
-            cout << "Successfully liked post" << endl;
-            rfile.close();
-            ofstream wfile("post.bin", )
-            return;
+            ps.setLikes();
+            break;
         }
     }
-    
-    cout << "You were unsuccessful in liking a post" << endl;
+    for(const auto& post : vectorOfPosts){
+        wfile << post;
+    }
+    wfile.close();  
 }
 
 void displayGlobalPostHistory(){
