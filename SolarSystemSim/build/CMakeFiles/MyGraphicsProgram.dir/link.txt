@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/MyGraphicsProgram.dir/solarSystemSim.cpp.o -o MyGraphicsProgram  -L/usr/lib/x86_64-linux-gnu  -lSDL2 /usr/lib/x86_64-linux-gnu/libGLEW.so -lassimp -lGL -ldl 
