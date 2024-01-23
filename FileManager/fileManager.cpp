@@ -33,6 +33,8 @@ public:
     void lookInDir();
 };
 
+
+
 void FileManager::viewContentsOfDir(){
     for(const auto file : fs::recursive_directory_iterator(getDirName())){
         cout << file.path() << endl;
@@ -48,7 +50,7 @@ void FileManager::moveToParentDir(){
         setDirPath(fs::current_path().parent_path().string());
     }
     else{
-        cout << "you have reach the home derectory" << endl;
+        cout << "you have reached the home derectory" << endl;
     }
 }
 
@@ -57,11 +59,11 @@ void FileManager::setFilePath(string inputFile){
     {
         cout << "successfully changed file" << endl;
         currentFilePath = inputFile;
+        fs::current_path(inputFile);
     }
     else{
         cout << "The file you want to access has not been found" << endl;
     }
-    
 }
 
 void FileManager::setDirPath(string inputDir){
@@ -69,6 +71,7 @@ void FileManager::setDirPath(string inputDir){
     {
         cout << "successfully changed directory" << endl;
         currentDirPath = inputDir;
+        fs::current_path(inputDir);
     }
     else{
         cout << "the directory you want to access has not been found" << endl;
@@ -78,13 +81,7 @@ void FileManager::setDirPath(string inputDir){
 
 int main(){
     FileManager fileManager;
-    cout << fileManager.getFileName() << endl;
-    cout << fileManager.getDirName() << endl;
-    fileManager.moveToParentDir();
-    cout << fileManager.getFileName() << endl;
-    cout << fileManager.getDirName() << endl;
-    fileManager.moveToParentDir();
-    cout << fileManager.getFileName() << endl;
-    cout << fileManager.getDirName() << endl;
+    fileManager.moveToParentDir(); 
+    fileManager.viewContentsOfDir();
     return 0;
 }
