@@ -6,5 +6,5 @@ CXX_DEFINES = -DSQLITE_ENABLE_COLUMN_METADATA
 
 CXX_INCLUDES = -I/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-src/include -I/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-src/sqlite3
 
-CXX_FLAGS = -std=gnu++11
+CXX_FLAGS = -std=gnu++20
 
