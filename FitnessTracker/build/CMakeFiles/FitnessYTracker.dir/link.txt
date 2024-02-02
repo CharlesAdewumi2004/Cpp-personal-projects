@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/FitnessYTracker.dir/main.cpp.o -o FitnessYTracker  _deps/sqlitecpp-build/libSQLiteCpp.a _deps/sqlitecpp-build/sqlite3/libsqlite3.a -ldl 

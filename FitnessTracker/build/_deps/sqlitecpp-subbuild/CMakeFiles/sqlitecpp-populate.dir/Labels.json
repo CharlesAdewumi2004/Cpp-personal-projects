@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/CMakeFiles/sqlitecpp-populate"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/CMakeFiles/sqlitecpp-populate.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/CMakeFiles/sqlitecpp-populate-complete.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-build.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-configure.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-download.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-install.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-mkdir.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-patch.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-test.rule"
+		},
+		{
+			"file" : "/home/charlie/Cpp-personal-projects/FitnessTracker/build/_deps/sqlitecpp-subbuild/sqlitecpp-populate-prefix/src/sqlitecpp-populate-stamp/sqlitecpp-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sqlitecpp-populate"
+		],
+		"name" : "sqlitecpp-populate"
+	}
+}
