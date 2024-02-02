@@ -1,26 +1,25 @@
-cmake_minimum_required(VERSION 3.11)  # Ensure CMake version is at least 3.11
-project(FitnessYTracker VERSION 1.0)  # Replace 'YourProjectName' with your actual project name
+cmake_minimum_required(VERSION 3.11)
+project(FitnessTracker VERSION 1.0)
 
-set(CMAKE_CXX_STANDARD 11)  # Set C++ standard to C++11
+set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Include the FetchContent module
+# Include main source file
+add_executable(${PROJECT_NAME} main.cpp)
+
+# Fetch SQLiteCpp library
 include(FetchContent)
-
-# Declare SQLiteCpp as a content to fetch
 FetchContent_Declare(
-  sqlitecpp
-  GIT_REPOSITORY https://github.com/SRombauts/SQLiteCpp.git
-  GIT_TAG        origin/master  # You can specify a specific commit, tag, or branch
+    sqlitecpp
+    GIT_REPOSITORY https://github.com/SRombauts/SQLiteCpp.git
+    GIT_TAG origin/master
 )
-
-# Make the SQLiteCpp content available for building
 FetchContent_MakeAvailable(sqlitecpp)
 
-# Define your executable
-add_executable(${PROJECT_NAME} main.cpp)  # Replace 'main.cpp' with the actual source files of your project
-
-# Link SQLiteCpp with your executable
+# Assuming SQLiteCpp exposes itself as SQLiteCpp target; adjust if necessary
 target_link_libraries(${PROJECT_NAME} SQLiteCpp)
-target_include_directories(${PROJECT_NAME} PRIVATE ${sqlitecpp_SOURCE_DIR}/include)
+
+# If SQLiteCpp requires manually linking against SQLite3, uncomment the following:
+# find_package(SQLite3 REQUIRED)
+# target_link_libraries(${PROJECT_NAME} SQLite::SQLite3)
 

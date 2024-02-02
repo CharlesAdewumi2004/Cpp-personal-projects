@@ -9,7 +9,7 @@ class DatabaseManger
 private:
     
 public:
-    DatabaseManger(/* args */);
+    DatabaseManger();
     ~DatabaseManger();
 };
 
@@ -69,4 +69,3 @@ int main(){
 
     return 0;
 }
-

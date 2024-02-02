@@ -1,4 +1,4 @@
-/home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles/FitnessYTracker.dir
+/home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles/FitnessTracker.dir
 /home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles/edit_cache.dir
 /home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles/rebuild_cache.dir
 /home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles/list_install_components.dir

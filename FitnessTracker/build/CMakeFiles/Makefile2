@@ -63,7 +63,7 @@ CMAKE_BINARY_DIR = /home/charlie/Cpp-personal-projects/FitnessTracker/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/FitnessYTracker.dir/all
+all: CMakeFiles/FitnessTracker.dir/all
 all: _deps/sqlitecpp-build/all
 .PHONY : all
 
@@ -72,7 +72,7 @@ preinstall: _deps/sqlitecpp-build/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/FitnessYTracker.dir/clean
+clean: CMakeFiles/FitnessTracker.dir/clean
 clean: _deps/sqlitecpp-build/clean
 .PHONY : clean
 
@@ -111,31 +111,31 @@ _deps/sqlitecpp-build/sqlite3/clean: _deps/sqlitecpp-build/sqlite3/CMakeFiles/sq
 .PHONY : _deps/sqlitecpp-build/sqlite3/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/FitnessYTracker.dir
+# Target rules for target CMakeFiles/FitnessTracker.dir
 
 # All Build rule for target.
-CMakeFiles/FitnessYTracker.dir/all: _deps/sqlitecpp-build/CMakeFiles/SQLiteCpp.dir/all
-CMakeFiles/FitnessYTracker.dir/all: _deps/sqlitecpp-build/sqlite3/CMakeFiles/sqlite3.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessYTracker.dir/build.make CMakeFiles/FitnessYTracker.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessYTracker.dir/build.make CMakeFiles/FitnessYTracker.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles --progress-num=1,2 "Built target FitnessYTracker"
-.PHONY : CMakeFiles/FitnessYTracker.dir/all
+CMakeFiles/FitnessTracker.dir/all: _deps/sqlitecpp-build/CMakeFiles/SQLiteCpp.dir/all
+CMakeFiles/FitnessTracker.dir/all: _deps/sqlitecpp-build/sqlite3/CMakeFiles/sqlite3.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessTracker.dir/build.make CMakeFiles/FitnessTracker.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessTracker.dir/build.make CMakeFiles/FitnessTracker.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles --progress-num=1,2 "Built target FitnessTracker"
+.PHONY : CMakeFiles/FitnessTracker.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/FitnessYTracker.dir/rule: cmake_check_build_system
+CMakeFiles/FitnessTracker.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles 12
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/FitnessYTracker.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/FitnessTracker.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/charlie/Cpp-personal-projects/FitnessTracker/build/CMakeFiles 0
-.PHONY : CMakeFiles/FitnessYTracker.dir/rule
+.PHONY : CMakeFiles/FitnessTracker.dir/rule
 
 # Convenience name for target.
-FitnessYTracker: CMakeFiles/FitnessYTracker.dir/rule
-.PHONY : FitnessYTracker
+FitnessTracker: CMakeFiles/FitnessTracker.dir/rule
+.PHONY : FitnessTracker
 
 # clean rule for target.
-CMakeFiles/FitnessYTracker.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessYTracker.dir/build.make CMakeFiles/FitnessYTracker.dir/clean
-.PHONY : CMakeFiles/FitnessYTracker.dir/clean
+CMakeFiles/FitnessTracker.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessTracker.dir/build.make CMakeFiles/FitnessTracker.dir/clean
+.PHONY : CMakeFiles/FitnessTracker.dir/clean
 
 #=============================================================================
 # Target rules for target _deps/sqlitecpp-build/CMakeFiles/SQLiteCpp.dir

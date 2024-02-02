@@ -67,8 +67,8 @@ CMAKE_BINARY_DIR = /home/charlie/Cpp-personal-projects/FitnessTracker/build
 
 # Special rule for the target edit_cache
 edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
+	/usr/bin/cmake-gui -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -162,17 +162,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named FitnessYTracker
+# Target rules for targets named FitnessTracker
 
 # Build rule for target.
-FitnessYTracker: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FitnessYTracker
-.PHONY : FitnessYTracker
+FitnessTracker: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 FitnessTracker
+.PHONY : FitnessTracker
 
 # fast build rule for target.
-FitnessYTracker/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessYTracker.dir/build.make CMakeFiles/FitnessYTracker.dir/build
-.PHONY : FitnessYTracker/fast
+FitnessTracker/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessTracker.dir/build.make CMakeFiles/FitnessTracker.dir/build
+.PHONY : FitnessTracker/fast
 
 #=============================================================================
 # Target rules for targets named SQLiteCpp
@@ -218,7 +218,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessYTracker.dir/build.make CMakeFiles/FitnessYTracker.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessTracker.dir/build.make CMakeFiles/FitnessTracker.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -226,7 +226,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessYTracker.dir/build.make CMakeFiles/FitnessYTracker.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessTracker.dir/build.make CMakeFiles/FitnessTracker.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -234,7 +234,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessYTracker.dir/build.make CMakeFiles/FitnessYTracker.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/FitnessTracker.dir/build.make CMakeFiles/FitnessTracker.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -250,7 +250,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... SQLiteCpp_cpplint"
-	@echo "... FitnessYTracker"
+	@echo "... FitnessTracker"
 	@echo "... SQLiteCpp"
 	@echo "... sqlite3"
 	@echo "... main.o"

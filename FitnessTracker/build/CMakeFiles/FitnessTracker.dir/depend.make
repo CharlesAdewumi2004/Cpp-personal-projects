@@ -1,2 +1,2 @@
-# Empty dependencies file for FitnessYTracker.
+# Empty dependencies file for FitnessTracker.
 # This may be replaced when dependencies are built.

@@ -66,7 +66,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/FitnessYTracker.dir/DependInfo.cmake"
+  "CMakeFiles/FitnessTracker.dir/DependInfo.cmake"
   "_deps/sqlitecpp-build/CMakeFiles/SQLiteCpp.dir/DependInfo.cmake"
   "_deps/sqlitecpp-build/CMakeFiles/SQLiteCpp_cpplint.dir/DependInfo.cmake"
   "_deps/sqlitecpp-build/sqlite3/CMakeFiles/sqlite3.dir/DependInfo.cmake"
