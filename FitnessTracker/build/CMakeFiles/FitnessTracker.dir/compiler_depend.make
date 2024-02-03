@@ -288,8 +288,18 @@ CMakeFiles/FitnessTracker.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/fs_ops.h \
   /usr/include/string.h \
   /usr/include/strings.h \
-  _deps/sqlitecpp-src/include/SQLiteCpp/Transaction.h
+  _deps/sqlitecpp-src/include/SQLiteCpp/Transaction.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc
 
+
+/usr/include/c++/11/bits/vector.tcc:
+
+/usr/include/c++/11/bits/stl_vector.h:
+
+/usr/include/c++/11/vector:
 
 /usr/include/strings.h:
 
@@ -352,6 +362,8 @@ _deps/sqlitecpp-src/include/SQLiteCpp/SQLiteCpp.h:
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/c++/11/bits/stl_bvector.h:
 
 /usr/include/c++/11/bits/fs_fwd.h:
 

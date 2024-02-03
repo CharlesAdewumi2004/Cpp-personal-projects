@@ -3,26 +3,62 @@
 #include <stdexcept>
 #include <memory>
 #include <filesystem>
+#include <vector>
 
 using namespace std;
 const string insertSQL = "INSERT INTO users (username, password, age, height, weight, gender) VALUES (?, ?, ?, ?, ?, ?)";
 
+class Workout
+{
+private:
+    string workoutName;
+    int sets, reps;
+
+public:
+    Workout() = default;
+    ~Workout() = default;
+};
+
+class WorkoutSession
+{
+private:
+    vector<unique_ptr<Workout>> vectortOfWorkouts;
+    int workoutSessionid, progresstrackerid;
+
+public:
+    WorkoutSession(int workoutSessionid, int progresstrackerid) : workoutSessionid(workoutSessionid), progresstrackerid(progresstrackerid){}
+    ~WorkoutSession() = default;
+};
+
 class FitnessProgress
 {
 private:
-    int userID, progressTrackerID;
+    int const userID, progressTrackerID;
+    vector<unique_ptr<WorkoutSession>> vectorOfWorkoutSessions;
 
 public:
-    FitnessProgress(int userID, int progressTrackerID) : userID(userID), progressTrackerID(progressTrackerID) {}
+    FitnessProgress(SQLite::Database &db, int userID, int progressTrackerID) : userID(userID), progressTrackerID(progressTrackerID) {}
     ~FitnessProgress() = default;
+    int getUserID() const { return userID; }
+    int getProgressTrackerID() const { return progressTrackerID; }
+    void createWorkoutSession(SQLite::Database &db);
+    const vector<unique_ptr<WorkoutSession>>& viewWorkoutSessions() const{return vectorOfWorkoutSessions;}
 };
 
-#include <iostream>
-#include <SQLiteCpp/SQLiteCpp.h>
-#include <memory>
-#include <exception>
-
-using namespace std;
+void FitnessProgress::createWorkoutSession(SQLite::Database &db)
+{
+    try
+    {
+        SQLite::Statement insert(db, "INSERT INTO workoutsession (progress_tracker_id) VALUES (?)");
+        insert.bind(1, progressTrackerID);
+        insert.exec();
+        vectorOfWorkoutSessions.push_back(make_unique<WorkoutSession>(db.getLastInsertRowid(), progressTrackerID));
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << "Error creating workout seesion" << e.what() << endl;
+    }
+}
 
 class DatabaseManager
 {
@@ -51,6 +87,23 @@ private:
                         FOREIGN KEY(user_id) REFERENCES users(userid)
                     );
                 )");
+            db->exec(R"(
+                    CREATE TABLE IF NOT EXISTS workoutsession (
+                        workoutsessionid INTEGER PRIMARY KEY AUTOINCREMENT,
+                        progress_tracker_id INTEGER,
+                        FOREIGN KEY(progress_tracker_id) REFERENCES progresstracker(progresstrackerid)
+                    );
+                )");
+            db->exec(R"(
+        `           CREATE TABLE IF NOT EXISTS workout (
+                        workoutid INTEGER PRIMARY KEY AUTOINCREMENT,
+                        reps INTEGER,
+                        sets INTEGER,
+                        workout_session_id INTEGER,
+                        FOREIGN KEY(workout_session_id) REFERENCES workoutsession(workoutsessionid)
+                    );
+                )");
+
         }
         catch (const std::exception &e)
         {
@@ -89,28 +142,7 @@ public:
     User(SQLite::Database &db, int UserID, int age, float height, float weight, std::string username, std::string password, Gender gender)
         : UserID(UserID), age(age), height(height), weight(weight), username(std::move(username)), password(std::move(password)), gender(gender)
     {
-        try
-        {
-            SQLite::Statement query(db, "SELECT user_id, progresstrackerid FROM users WHERE username = ? AND password = ?");
-            query.bind(1, this->username);
-            query.bind(2, this->password);
-            if (query.executeStep() && query.getColumn(0).getInt() == getUserID())
-            {
-                pCurrentFitnessTracker = std::make_unique<FitnessProgress>(query.getColumn(0).getInt(), query.getColumn(1).getInt());
-            }
-            else
-            {
-                SQLite::Statement insert(db, insertSQL);
-                insert.bind(1, getUserID());
-                insert.exec();
-                pCurrentFitnessTracker = std::make_unique<FitnessProgress>(getUserID(), query.getColumn(1).getInt());
-            }
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << "Failed to open database: \t" << e.what() << std::endl;
-            throw; 
-        }
+        ensureFitnessProgress(db);
     }
     ~User() = default;
     int getUserID() const { return UserID; }
@@ -121,7 +153,27 @@ public:
     string getPassword() const { return password; }
     bool setHeight(float inputHeight);
     bool setWeight(float inputWeight);
+    void ensureFitnessProgress(SQLite::Database &db);
 };
+
+void User::ensureFitnessProgress(SQLite::Database &db)
+{
+    int progressTrackerID = -1;
+    SQLite::Statement query(db, "SELECT progresstrackerid FROM progresstracker WHERE user_id = ?");
+    query.bind(1, UserID);
+    if (query.executeStep())
+    {
+        progressTrackerID = query.getColumn(0).getInt();
+    }
+    else
+    {
+        SQLite::Statement insert(db, "INSERT INTO progresstracker (user_id) VALUES (?)");
+        insert.bind(1, UserID);
+        insert.exec();
+        progressTrackerID = static_cast<int>(db.getLastInsertRowid());
+    }
+    pCurrentFitnessTracker = std::make_unique<FitnessProgress>(db, UserID, progressTrackerID);
+}
 
 bool User::setHeight(float inputHeight)
 {
@@ -228,10 +280,23 @@ public:
 
 int main()
 {
-    DatabaseManager dbManager("/home/charlie/Cpp-personal-projects/FitnessTracker/forsen.db3");
-    // Use dbManager.getDB() to get the reference of the SQLite::Database object]
-    cout << "Database path: " << filesystem::absolute("forsen.db3") << endl;
-    auto user = UserManager::registerUser(dbManager.getDB(), "charlie", "kappa", 165.5, 195.3, 19, Gender::male);
+    try
+    {
+        DatabaseManager dbManager("/home/charlie/Cpp-personal-projects/FitnessTracker/forsen.db3");
+        auto user = UserManager::registerUser(dbManager.getDB(), "charlie", "kappa123", 165.5, 195.3, 19, Gender::male);
+        if (user)
+        {
+            cout << "Registration successful" << endl;
+        }
+        else
+        {
+            cout << "Registration failed" << endl;
+        }
+    }
+    catch (const exception &e)
+    {
+        cerr << "An error occurred: " << e.what() << endl;
+    }
 
     return 0;
 }
